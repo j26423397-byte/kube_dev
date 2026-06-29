@@ -5,8 +5,8 @@ metadata:
   name: {{ include "advanced-web.fullname" . }}
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
     name: {{ include "advanced-web.fullname" . }}
 
   minReplicas: {{ .Values.autoscaling.minReplicas }}
