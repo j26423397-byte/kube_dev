@@ -1,8 +1,8 @@
 replicaCount: 2
 
 image:
-  repository: nginx
-  tag: "1.30"
+  repository: ghcr.io/j26423397-byte/hello-k8s
+  tag: "58ffe7e216acd5f0ef91bd4b0cd62bc2cb84616a"
   pullPolicy: IfNotPresent
 
 service:
