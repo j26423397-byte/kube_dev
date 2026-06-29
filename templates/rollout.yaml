@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ include "advanced-web.fullname" . }}
   labels:
@@ -7,7 +7,12 @@ metadata:
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  {{- end }}  
+  strategy:
+    blueGreen:
+      activeService: advanced-web
+      previewService: advanced-web-preview
+      autoPromotionEnabled: false
   selector:
     matchLabels:
       {{- include "advanced-web.selectorLabels" . | nindent 6 }}
@@ -69,18 +74,10 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.volumeMounts }}
-          volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
       volumes:
         - name: storage
           persistentVolumeClaim:
             claimName: {{ include "advanced-web.fullname" . }}-pvc
-      {{- with .Values.volumes }}
-      volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
