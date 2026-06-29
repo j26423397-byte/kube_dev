@@ -1,0 +1,41 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: "1.29"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  host: web.local
+
+config:
+  APP_NAME: advanced-web
+  APP_MODE: dev
+
+secret:
+  DB_PASSWORD: "1234"
+
+pvc:
+  enabled: true
+  storage: 1Gi
+  mountPath: /data
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 300m
+    memory: 256Mi
