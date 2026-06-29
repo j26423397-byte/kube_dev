@@ -16,8 +16,7 @@ ingress:
 
 config:
   APP_NAME: advanced-web
-  APP_MODE: gitops-test
-
+  APP_MODE: auto-sync-test
 secret:
   DB_PASSWORD: "1234"
 
