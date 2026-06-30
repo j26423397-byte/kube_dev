@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: ghcr.io/j26423397-byte/hello-k8s
-  tag: "58ffe7e216acd5f0ef91bd4b0cd62bc2cb84616a"
+  tag: "20dc92636b14527e50bf7ed6e3ab92f600cd2119"
   pullPolicy: IfNotPresent
 
 service:
